@@ -23,7 +23,23 @@ export class AboutService {
     return this.aboutRepository.findOneBy({ selected: true });
   }
 
+  async setSelected(id : number):  Promise<void> {
+    let currentSelected = await this.aboutRepository.findOneBy({ selected: true });
+    await this.aboutRepository.update(currentSelected.id,{"selected": false})
+    await this.aboutRepository.update(id,{"selected": true})
+    return
+  }
+
   async remove(id: number): Promise<void> {
     await this.aboutRepository.delete(id);
+  }
+
+  async add(about : About): Promise<any> {
+     let res = await this.aboutRepository.insert(about);
+     return {
+        "id": res.identifiers[0].id,
+        "value": about.value,
+        "selected": about.selected
+     }
   }
 }

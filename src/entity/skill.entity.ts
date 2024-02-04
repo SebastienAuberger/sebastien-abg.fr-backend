@@ -1,17 +1,14 @@
 
-import { ApiProperty } from '@nestjs/swagger';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class About {
+export class Skill {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ApiProperty()
   @Column()
-  value: string;
+  note: number;
 
-  @ApiProperty()
   @Column()
-  selected: boolean;
+  image: string;
 }
